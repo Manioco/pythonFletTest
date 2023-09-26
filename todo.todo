@@ -1,0 +1,32 @@
+TODO:
+- Fazer uma verificação para garantir que nenhuma tarefa seja repetida 
+    ☐ pegar uma lista com todas as tarefas não concluidas
+
+- Criar um código para identificar cada tarefa
+    ☐ Criar uma numeração ou uma mistura de letras e números para identificar cada tarefa
+
+- adicionar as colunas de código nos databases
+    ☐ adicionar a coluna de código no database de ativos
+    ☐ adicionar a coluna de código no database de deletados
+    ☐ adicionar a coluna de código no database de LOG    
+
+- inserir um banco de dados para os ativos
+    ☐ Contemplam todas as tarefas concluidas e não concluidas
+    ☐ colunas: código, nome, status
+    
+- inserir um banco de dados para os deletados
+    ☐ Contemplam todas as tarefas deletadas
+    ☐ colunas: código, nome, status
+
+- criar um database de LOG
+    ☐ Contempla todas as atividades realizadas no e pelo app
+    ☐ colunas: código, data, hora, evento, descrição
+    ☐ OBS: a descrição deve conter o que foi realizado 
+
+- implementar todas as funções de banco de dados
+    ☐ implementar a função de LOG
+    ☐ implementar a função de deletar tarefas
+    ☐ implementar a função de adicionar tarefas
+    ☐ implementar a função de editar tarefas
+    ☐ implementar a função de marcar tarefas como concluidas
+    ☐ implementar a função de marcar tarefas como não concluidas

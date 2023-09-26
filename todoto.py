@@ -1,18 +1,8 @@
 import flet as ft
-import sqlite3
 import time
 import glob
 import os
-
-
-"""
-Fazer uma verificação para garantir que nenhuma tarefa seja repetida
-Criar um código para identificar cada tarefa
-adicionar as colunas de código nos databases
-criar um database de LOG
-inserir um banco de dados para os ativos
-inserir um banco de dados para os deletados
-"""
+from database_execute import db_execute
 
 
 
@@ -180,29 +170,6 @@ class TodoApp(ft.UserControl):
         await super().update_async()
 
 
-def db_execute(date:str, query, params = []):
-    with sqlite3.connect(f'database{date}.db') as con:
-        cur = con.cursor()
-        cur.execute(query, params)
-        con.commit()
-        print(f"Executed query: {query}")
-        return cur.fetchall()
-
-def delete_old_databases(current_date: str):
-    # Obtém uma lista de todos os bancos de dados no diretório atual
-    database_files = glob.glob('*.db')
-
-    for db_file in database_files:
-        # Extrai a data do nome do arquivo (assumindo que o formato seja "tasksDD-MM-YYYY.db")
-        filename = os.path.basename(db_file)
-        date_part = filename.replace('tasks', '').replace('.db', '')
-
-        # Compara a data do arquivo com a data atual
-        if date_part != current_date:
-            # Se a data do arquivo for diferente da data atual, exclua o arquivo
-            os.remove(db_file)
-            print(f"Deleted old database: {db_file}")
-
 # async function to create the page
 async def main(page: ft.Page):
     page.title = "ToDo App"
@@ -212,10 +179,9 @@ async def main(page: ft.Page):
 
     # create application instance
     # date = time.strftime("%d%m%Y")
-    date = time.strftime("%m")
-    delete_old_databases(date)
-    db_execute(date, f'CREATE TABLE IF NOT EXISTS tasks{date} (name, status)')
-    app = TodoApp(date)
+    # date = time.strftime("%m")
+    db_execute(f'CREATE TABLE IF NOT EXISTS tasks (name, status)')
+    app = TodoApp()
 
     # add application's root control to the page
     await page.add_async(app)
