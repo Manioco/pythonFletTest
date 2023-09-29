@@ -50,6 +50,7 @@ def bigger_id():
             bigger_id = table_id
     return bigger_id
 
+
 def list_items_from_table(table_name, filter = None):
     query = f"SELECT * FROM {table_name}"
     if filter:
@@ -65,3 +66,13 @@ def insert(table_name, task_name):
         task_name.value = ''
         results = db_execute('SELECT * FROM tasks')
         update_task_list()
+    
+
+def update_task_list(filter=""):
+    tasks = list_items_from_table('tasks', filter)
+    for task in tasks:
+        task_name = task[0]
+        task_status = task[1]
+        task_id = task[2]
+        task = Task(task_name, task_status, task_id)
+        page.tasks.controls.append(task)

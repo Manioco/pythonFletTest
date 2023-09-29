@@ -5,7 +5,6 @@ import os
 from database_execute import db_execute
 
 
-
 # Class to create tasks
 class Task(ft.UserControl):
     def __init__(self, task_name, task_status_change, task_delete):
